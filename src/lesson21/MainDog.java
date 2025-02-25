@@ -11,10 +11,6 @@ public class MainDog {
         dog.run();
         dog.run();
         dog.run();
-        dog.run();
-
-
-        dog.run();
         dog.info();
 
 
