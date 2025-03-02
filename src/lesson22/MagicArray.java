@@ -161,6 +161,7 @@ public class MagicArray {
         System.out.println(Arrays.toString(array));
     }
 
+
 }
 // [5, 20]
 
