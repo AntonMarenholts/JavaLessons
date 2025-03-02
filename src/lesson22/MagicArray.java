@@ -180,6 +180,7 @@ public class MagicArray {
         for (int i = 0; i < cursor; i++){
             result[i] = array[i];
         }
+        return result;
     }
 
 
