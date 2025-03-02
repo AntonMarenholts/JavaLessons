@@ -14,7 +14,13 @@ public class MagicArray {
     }
 
     public MagicArray(int[] array){
-
+        if (array == null || array.length == 0) {
+            this.array = new int[10];
+        } else {
+            this.array = new int[array.length * 2];
+            // (int...numbers) может принять ссылку на массив int[]
+            add(array);
+        }
     }
 
     // Добавление в массив одного элемента
@@ -145,14 +151,35 @@ public class MagicArray {
     // Индекс последнего значения
     // {1, 100, 4, 100, 24, 0 ,100} -> LastIndexOf(100) -> 6
     int LastIndexOf(int value){
-        //
-        return -1;
+        for (int i = cursor - 1; i >= 0; i--){
+            if (array[i] == value) return i;
+
+        }
+        return - 1;
     }
 
     // Удаление элемента по значению. Возвращал boolean
     // Если удалил - true , в противном случае - false
     boolean removeByValue(int value){
-        return false;
+        /*
+        1. Есть ли элемент с таким значением - indexOf
+        2. Если элемента нет - ничего не пытаемся удалить - возвращаем false
+        3. Если найден - удалить и затем вернуть true
+         */
+        int index = indexOf(value);
+        if (index < 0) return false;
+
+        // В эту строку кода попадём только при index = 0 или больше
+        remove(index);
+        return true;
+    }
+
+    //массив,состоящий из элементов магического массива
+    public int[] toArray(){
+        int[]result = new int[cursor];
+        for (int i = 0; i < cursor; i++){
+            result[i] = array[i];
+        }
     }
 
 
@@ -177,4 +204,5 @@ public class MagicArray {
 9. Поиск по значению. Возвращать индекс первого вхождения элемена.++
 10. Индекс последнего вхождения
 11. Конструктор,принимающий обычный массив.Создать магический массив с элементами из этого массива
+12. Написать метод,который вернёт массив,состоящий из элементов магического массива
  */
