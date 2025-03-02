@@ -12,7 +12,6 @@ public class HomeWork_2 {
         printRevers(arr);
 
         printIndex(arr,2);
-
     }
     public static void printIndex(int[] arr, int index){
         for (int i = 0;i < index; i++){
@@ -21,10 +20,7 @@ public class HomeWork_2 {
         for (int i = arr.length - 1; i >= index; i--){
             System.out.print(arr[i] + " ");
         }
-
     }
-
-
     public static void printRevers(int[] arr) {
         for (int i = arr.length - 1;i >= 0; i--){
             System.out.print(arr[i] + " ");

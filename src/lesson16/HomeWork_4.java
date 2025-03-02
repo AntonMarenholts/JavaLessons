@@ -28,9 +28,5 @@ public class HomeWork_4 {
             System.out.print(number[b] + " ");
             b++;
         }
-
-
-
-
     }
 }
