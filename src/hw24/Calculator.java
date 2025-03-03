@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Calculator {
 
+    // infinity - бесконечность
+    // NaN - значение не определено
+
 
     public static double addition(double a, double b){
         return a + b;
