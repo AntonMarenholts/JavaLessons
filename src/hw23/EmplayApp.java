@@ -1,4 +1,4 @@
-package HomeWork23;
+package hw23;
 
 public class EmplayApp {
     public static void main(String[] args) {

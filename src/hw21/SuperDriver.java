@@ -1,4 +1,4 @@
-package HomeWork21;
+package hw21;
 
 public class SuperDriver {
     public static void main(String[] args) {

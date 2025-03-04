@@ -1,4 +1,4 @@
-package HomeWork23;
+package hw23;
 
 public class Employee {
     /*
