@@ -20,7 +20,11 @@ public class Rectangle extends Shape{
         calculateArrea();
     }
 
-    private void calculateArrea() {this.arrea = width * height;}
+    public double calculateArrea() {
+        double arrea = width * height;
+        System.out.println(arrea);
+        return arrea;
+    }
 
     public double getArrea() {
         return arrea;
