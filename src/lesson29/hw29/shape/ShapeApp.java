@@ -18,8 +18,9 @@ public class ShapeApp {
             totalPerimeter += shape.getPerimeter();
         }
 
-        System.out.println("Общая площадь: " + totalArea);
-        System.out.println("Общий периметр: " + totalPerimeter);
+        System.out.printf("Общая площадь: %.2f \n", totalArea);
+        System.out.printf("Общий периметр: %.2f \n", totalPerimeter);
+
 
 
 
