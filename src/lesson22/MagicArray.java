@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class MagicArray {
 
-    int[] array;// null
-    int cursor; // по умолчанию = 0
+    private int[] array;// null
+    private int cursor; // по умолчанию = 0
 
     //Методы,расширяющие функционал массива
 
