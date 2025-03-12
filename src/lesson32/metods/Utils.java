@@ -12,5 +12,46 @@ public class Utils {
     }
 
     // Метод, который возвращает первый элемент в списке
+    public static <T> T getFirstElement(MyList<T> list){
+        if (list.isEmpty()) return null;
+
+        return list.get(0);
+    }
+
+    // Ограничение сверху Upper Bound
+    // Ограничиваем диапазон принимаемых типов данных
+    // <T extends SomeClass> - Что Т должен быть либо классом SommeClass,
+    // либо его потомком (подклассом)
+    public static <T extends Number> int sumElements(T... elements){
+
+        int sum = 0;
+        for (int i = 0; i < elements.length; i++){
+            sum += elements[i].intValue();
+        }
+        return sum;
+    }
+
+    // ? - Wildcard - "неизвестный / любой тип"
+    // ? extends Number - любой тип,являющийся наследником Number
+    public static double listSum(MyList<? extends Number>  listNumbers){
+        double sum = 0;
+        for (int i = 0; i < listNumbers.size(); i++){
+            System.out.println(listNumbers.get(i));
+            sum += listNumbers.get(i).doubleValue();
+        }
+        return sum;
+
+    }
+
+    // Ограничения снизу lower Bound
+    // ? super Integer - мы работаем с неизвестным типом, который является клоассом
+    // Integer или его родителем (супер классом)
+     public static void addNumbers(MyList<? super Integer> list){
+        for (int i = 0; i < 5; i++){
+            list.add(i);
+        }
+         System.out.println(list);
+     }
+
 
 }
