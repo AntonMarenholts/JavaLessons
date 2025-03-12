@@ -53,6 +53,77 @@ public class Wrappers {
 
         //Общие(или схожие) методы, которыми обладают классы-обёртки:
 
+        // .valueOf() - преобразует явным образом приметив или строку в объект типа обёртки
+        Integer e = Integer.valueOf(127);
+        Integer e1 = Integer.valueOf("127");
+        System.out.println(e + " | " + e1);
+
+        double dbl = Double.valueOf(123.23);
+        System.out.println("double: " + dbl);
+
+        boolean b1 = Boolean.valueOf("true");
+
+
+        // parseXXX() - преобразует строку в соответствующий примитив
+        double dblP = Double.parseDouble("456");
+        Double dblD = Double.valueOf(123.3);
+        System.out.println(dblP + " | " + dblD);
+
+        // toString - переопределяет метод , который возвращает строковое представление числа
+        // equals - сравнивает два объекта по значению
+
+        Integer i1 = 127;
+        Integer i2 = 234;
+        System.out.println(i1 > i2);
+
+        // compareTo - сравнивает текущий объект с другим объектом. Кто больше?
+        // тип возвращаемого значения int
+        System.out.println("i1.compareTo(i2): " + i1.compareTo(i2));
+        System.out.println("i2.compareTo(i1): " + i2.compareTo(i1));
+        System.out.println("i2.compareTo(i2): " + i2.compareTo(i2));
+        /*
+        i1 > i2 -> положительное
+        i1 < i2 -> отрицательное
+        i1 = i2 -> 0
+         */
+
+        System.out.println("\n=======================");
+
+        //xxxValue() - возвращает значения объекта как примитивный тип
+
+        Double d2 = 125.67; // автоупаковка
+        d2 = Double.valueOf(125.67); // явная/принудительная упаковка
+        double dPrimitiv = d2; // распаковка
+        dPrimitiv = d2.doubleValue(); // явная/принудительная распаковка
+
+        System.out.println("\n====================");
+
+        /*
+        Абстрактный класс Number. Все числа-обёртки наследуются от класса Number
+        Byte,Short,Integer,Long,Float,Double
+         */
+
+        /*
+        byteValue()
+        shortValue()
+        integerValue()
+        longValue()
+        floatValue()
+        doubleValue()
+         */
+
+        //
+        Integer integer = 31844;
+        double dVal = integer.doubleValue();
+        System.out.println(dVal);
+
+        System.out.println(integer.floatValue());
+        System.out.println(integer.longValue());
+
+        Double dWrapper = 245.54;
+        int iVal = dWrapper.intValue();
+        System.out.println(iVal);
+
 
 
 
