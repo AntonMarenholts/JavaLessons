@@ -3,7 +3,7 @@ package lesson31.lists;
 public class MyListTest {
     public static void main(String[] args) {
 
-        MyList<Integer> integerMyList = new MagicArrayList<>();
+        MyList<Integer> integerMyList = new MyArrayList<>();
 
         integerMyList.add(10);
         System.out.println(integerMyList);

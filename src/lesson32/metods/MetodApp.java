@@ -1,6 +1,6 @@
 package lesson32.metods;
 
-import lesson31.lists.MagicArrayList;
+import lesson31.lists.MyArrayList;
 import lesson31.lists.MyList;
 
 import java.util.Arrays;
@@ -18,12 +18,12 @@ public class MetodApp {
         int[] intArray = {1, 2, 3, 4, 5, 6};
         // Utils.swap(intArray, 1, 2); // Массив примитивов не примет
 
-        MyList<Double> doubleList = new MagicArrayList<>(new Double[]{1.5, 2.5, 3.5});
+        MyList<Double> doubleList = new MyArrayList<>(new Double[]{1.5, 2.5, 3.5});
 
         Double firstValue = Utils.getFirstElement(doubleList);
         System.out.println("firstValue: " + firstValue);
 
-        MyList<String> stringList = new MagicArrayList<>(strings);
+        MyList<String> stringList = new MyArrayList<>(strings);
         System.out.println(Utils.getFirstElement(stringList));
 
         System.out.println("\n===================");
@@ -37,7 +37,7 @@ public class MetodApp {
 
         System.out.println("\n===================");
 
-        MyList<Integer> integerList = new MagicArrayList<>(integers);
+        MyList<Integer> integerList = new MyArrayList<>(integers);
 
         Utils.addNumbers(integerList);
     }

@@ -1,13 +1,13 @@
 package lesson32;
 
-import lesson31.lists.MagicArrayList;
+import lesson31.lists.MyArrayList;
 
 import java.util.Arrays;
 
 public class ArrayTest {
     public static void main(String[] args) {
 
-        MagicArrayList<Integer> list = new MagicArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Integer[] arr = list.toArray();
         System.out.println(Arrays.toString(arr));

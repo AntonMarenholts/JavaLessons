@@ -16,11 +16,11 @@ NumericPair<Double> doublePair = new NumericPair<>(5.5, 4.5);
 System.out.println(doublePair.sum()); // Вывод: 10.0
  */
 
-public class NumericPair <T extends Number> {
+public class NumericPair <T extends Number, E extends Number> {
     private T num1;
-    private T num2;
+    private E num2;
 
-    public NumericPair(T num1, T num2) {
+    public NumericPair(T num1, E num2) {
         this.num1 = num1;
         this.num2 = num2;
     }

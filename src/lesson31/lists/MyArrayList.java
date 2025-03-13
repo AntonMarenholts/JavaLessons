@@ -2,6 +2,7 @@ package lesson31.lists;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 /**
@@ -9,19 +10,19 @@ import java.util.Objects;
  * {@code @date} 26.02.2025
  */
 
-public class MagicArrayList<T> implements MyList<T> {
+public class MyArrayList<T> implements MyList<T> {
     private T[] array;
     private int cursor; // по умолчанию = 0
 
     // Методы, расширяющие функционал массива
 
     @SuppressWarnings("unchecked")
-    public MagicArrayList() {
+    public MyArrayList() {
         this.array = (T[]) new Object[10]; // [0, 0...0]
     }
 
     @SuppressWarnings("unchecked")
-    public MagicArrayList(T[] array) {
+    public MyArrayList(T[] array) {
 
         if (array == null || array.length == 0) {
             this.array = (T[]) new Object[10];
@@ -258,6 +259,29 @@ public class MagicArrayList<T> implements MyList<T> {
     public void test() {
         System.out.println(Arrays.toString(array));
     }
+
+    // Невозможно вернуть объект типа интерфейс.
+    // Если тип возвращаемого значения (или параметр класса) имеет тип интерфейс,
+    // это значит,что я должен вернуть объект класса, который имплементировал этот интерфейс
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator<T> {
+
+        int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < cursor;
+        }
+
+        @Override
+        public T next() {
+            return array[currentIndex++];
+        }
+    } // End class MyIterator
 
 }
 // [5, 20]
