@@ -8,6 +8,14 @@ public class PersonApp {
 
         person.setEmail("test@mailne.t");
         System.out.println(person);
+
+        person.setPassword("QWE4RTYqwwe%");
+        System.out.println(person);
+
+
     }
+
+
+
 
 }

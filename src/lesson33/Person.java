@@ -17,6 +17,8 @@ public class Person {
         if (isEmailValid(email)){
         this.email = email;
 
+        } else {
+            System.out.println("Ошибка : emal " + email + "невалидный");
         }
     }
 
@@ -25,7 +27,12 @@ public class Person {
     }
 
     public void setPassword(String password) {
+        if (isPasswordValid(password)){
+
         this.password = password;
+        } else {
+            System.out.println("Ошибка: пароль не соответствует требованиям безопасности!");
+        }
     }
 
     /*
@@ -83,6 +90,7 @@ public class Person {
         return false;
     }
     private boolean isPasswordValid(String password){
+        if (password == null) return false;
         return isLengthValid(password) &&
                 hasDigit(password) &&
                 hasLowerCase(password) &&
@@ -110,6 +118,7 @@ public class Person {
 
     private boolean isEmailValid(String email){
 
+
         // 1.Должна присутствовать @
         int indexAt = email.indexOf('@');
         int lastAt = email.lastIndexOf('@');
@@ -122,7 +131,7 @@ public class Person {
 
         // 3. После последней точки есть 2 или более символов
         int lastDotIndex = email.lastIndexOf('.');
-        if (lastDotIndex + 2 >= email.length() -2) return false;
+        if (lastDotIndex + 2 > email.length()) return false;
 
         // 4. Алфавит, цифры, '-', '_', '@', '.'
         /*
@@ -158,7 +167,9 @@ public class Person {
 
         // Все проверки пройдены. mail подходит
         return true;
+
     }
+
 
 
 

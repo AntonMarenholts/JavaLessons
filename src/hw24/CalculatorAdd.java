@@ -11,9 +11,9 @@ public class CalculatorAdd {
         System.out.print("Введите второе число: ");
         double b = scanner.nextDouble();
 
-        System.out.println("Сложение: " + Calculator.addition(a, b));
-        System.out.println("Вычитание: " + Calculator.subtract(a,b));
-        System.out.println("Умножение: " + Calculator.multiply(a, b));
+        System.out.println("Сложение: " + Calculator.add(a, b));
+        System.out.println("Вычитание: " + Calculator.subtract((int) a, (int) b));
+        System.out.println("Умножение: " + Calculator.multiply((int) a, (int) b));
         System.out.println("Деление: " + Calculator.divide(a, b));
 
     }
