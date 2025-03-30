@@ -1,9 +1,6 @@
 package lesson43;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ListExample {
     public static void main(String[] args) {
@@ -67,6 +64,10 @@ public class ListExample {
         // находящихся на позициях от idxFrom (включительно) до idxTo (не включительно)
         List<Integer> subList = list.subList(1,5);
         System.out.println("subList" + subList);
+
+        System.out.println("=======================\n");
+
+
 
 
     }
