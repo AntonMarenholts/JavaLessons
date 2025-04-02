@@ -95,7 +95,41 @@ public class MapExample2 {
 
         System.out.println("map: " + map);
 
+        // put vs replace
         // foreach - перебора всех пар ключ-значение с возможностью применить к ним какую-то функцию.
+
+        System.out.println("=================put vs replace================\n");
+
+        System.out.println(map.put(11, "orange"));// если такого ключа нет,добавляется новая пара ключ-значение
+        System.out.println(map.put(11, "green"));// если ключ уже есть,значение будет переписано
+
+        // replace(K key, V value) - если такого ключа нет,новая пара не создаётся
+        System.out.println(map.replace(200, "red")); // ключа нет,но новая пара не добавляется
+        System.out.println(map.replace(15, "red")); // ключ есть,значенте будет переписано
+
+
+        System.out.println(map);
+
+        System.out.println("=====================foreach==================\n");
+
+        for (Map.Entry<Integer,String> entry : map.entrySet()){
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+            // могу что-то делать с этими значениями
+            System.out.println(key + ": " + value);
+        }
+
+        // foreach - перебор всех пар ключ-значение с возможностью применить к ним какую-то функцию
+        map.forEach((k,v) -> System.out.println(k + "= " + v));
+
+        System.out.println("=================Многострочное действие=========================");
+        map.forEach((key,val)->{
+            System.out.println("Iteration: ");
+            System.out.println("key: " + key + "| Value: " + val);
+
+        });
+
+
 
 
 
