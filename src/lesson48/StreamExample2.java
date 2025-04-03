@@ -1,4 +1,4 @@
-package lesson47;
+package lesson48;
 
 /*
 Stream API - мощный инструмент, позволяющий обрабатывать наборы данных в декларативном стиле
@@ -23,11 +23,13 @@ Pipeline - последовательность операций,выполня�
 
  */
 
+import lesson47.Cat;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StreamExample {
+public class StreamExample2 {
 
     /*
    1. Промежуточные методы (ВСЕ возвращают поток):
@@ -47,6 +49,18 @@ public class StreamExample {
 
    distinct() - Удаляет дубликаты из потока. Сравнивание (определение равенства) методом equals
 
+   Limit(long maxSize) - ограничивает кол-во элементов потока.В потоке может быть не больше maxSize элементов
+
+   skip() — используется для пропуска первых n элементов потока и возвращает новый поток,
+   содержащий оставшиеся элементы.
+
+   Stream<T> mapToObj(Function() mapper) - преобразование примитивного типа данных
+   в ссылочный тип данных
+
+   boxed() - преобразует потока примитивов (IntStream и т.п) в поток соответствующих обёрток
+
+   mapToInt - преобразует поток Stream<Integer> в поток примитивов IntStream
+
 
     -----------
 
@@ -55,6 +69,17 @@ public class StreamExample {
     R collect(Collector<T, A, R> collector) - преобразует э-ты потока в разные виды коллекций или другие структуры данных.
 
     void foreach(Consumer<T> action) - выполняет заданное действие для каждого э-та потока
+
+    Optional<T> max(Comparator<T> comparator) - возвращает элемент с макс. значениями (самое первое) по мнению компаратора
+    Optional<T> min(Comparator<T> comparator) - возвращает элемент с мин. значениями (самое левое) по мнению компаратора
+
+    long count() - возвращает количество элементов в потоке данных
+
+    Optional<T> findFirst - получить первый элемент потока. Нужно сортировать.
+    Optional<T> findAny - получить случайный элемент потока.
+
+
+
 
 
      */
@@ -71,8 +96,137 @@ public class StreamExample {
 //        task7();
 //        task8();
 //        task9();
-        task10();
+//        task10();
+//        task11();
+//        task12();
+//        task13();
+//        task14();
+//        task15();
+        task16();
 
+
+    }
+
+    private static void task16() {
+        int[] ints = {1,2,3,4,5,6,7,8,9,};
+
+        // Пеобразовать массив примитивов в список (коллекцию), используя Stream
+
+        // Stream<int> - не бывает. IntStream, DoubleStream...... бывают потоки примитивов
+
+        List<Integer> integers =  Arrays.stream(ints)
+//                .mapToObj(i -> Integer.valueOf(i))
+                // работает автоупаковка
+//                .mapToObj(i -> i)
+                .boxed()
+                .toList();
+        System.out.println("integers: " + integers);
+
+        // Получить из коллекции Integer массив примитивов
+        int[] intArray = integers.stream()
+                .mapToInt(i -> i)
+                // хочет поток примитивов
+                .toArray();
+
+        System.out.println("intArray: " + Arrays.toString(intArray));
+
+    }
+
+    private static void task15() {
+        List<Integer> integers = List.of(5,4,13,56,24,-10,-5,0,45,-25,200);
+        // Получить первый(самый левый) элемент потока.
+
+        // Альтернативный способ нахождения минимума
+        Optional<Integer> first = integers.stream()
+                .sorted()
+                .findFirst();// Получить первый элемент потока
+//                .findFirst();// Получить случайный элемент потока
+
+        System.out.println("first: " + first);
+
+
+
+    }
+
+    private static void task14() {
+
+        List<Integer> integers = List.of(5,4,13,56,24,-10,-5,0,45,-25,200);
+
+        // Хочу получить список,состоящий из 3-х самых маленьких чисел списка
+        List<Integer> smalLest = integers.stream()
+                .sorted()
+                .limit(3)
+                .toList();
+        System.out.println("smalLest: " + smalLest);
+
+        // Получить список чисел,отбросив два самых маленьких
+
+        List<Integer> list = integers.stream()
+                .sorted()
+                .skip(2)
+                .toList();
+
+        System.out.println("list: " + list);
+
+
+
+    }
+
+    private static void task13(){
+
+        // Посчитать кол-во чётных чисел в списке используя Stream
+        List<Integer> integers = List.of(5,4,13,56,24,-10,-5,0,45,-25,200);
+
+        long count = integers.stream()
+                .filter(n -> n % 2 == 0)
+                .count();
+
+        System.out.println(count);
+
+    }
+
+    private static void task12(){
+
+        List<Cat> cats = getListCats();
+
+        // Найти самое длинное имя кота из списка котов
+
+        /*
+        Стрим котов преобразовать в стрим имён и при помощи метода max преобразовать по длинне
+         */
+
+        Optional<String> longestName = cats.stream()
+                .filter(Objects::nonNull)
+                .map(Cat::getName)
+                .max(Comparator.comparing(String::length));
+
+        if (longestName.isPresent()){
+            System.out.println(longestName.get());
+        } else {
+            System.out.println("отов с таким именем не найдено");
+        }
+
+
+    }
+
+    private static void task11(){
+         List<Integer> integers = List.of(5,4,13,56,24,-10,-5,0,45,-25,200);
+
+         // Найти максимальное число из списка
+        Optional<Integer> max = integers.stream()
+                .max(Comparator.naturalOrder());
+
+        System.out.println("max: " + max);
+        System.out.println("max: " + max.orElse(null));
+
+        // Найти самое маленько число в потоке,которое больше 100
+
+        Optional<Integer> minValue = integers.stream()
+                .filter(n->n > 100)
+                .min(Integer::compareTo);
+
+        System.out.println("minValue: " + minValue);
+        System.out.println("minValue: " + minValue.orElse(null));
 
     }
 
@@ -87,13 +241,13 @@ public class StreamExample {
 
         System.out.println("================================");
 
-        Cat cat1 = new Cat("Bear",5,"braun");
-        Cat cat2 = new Cat("Python",7,"green");
-        Cat cat3 = new Cat("Tiger",3,"yellow");
-        Cat cat4 = new Cat("Panda",4,"black");
-        Cat cat5 = new Cat("Panda",4,"black");
+        lesson47.Cat cat1 = new lesson47.Cat("Bear",5,"braun");
+        lesson47.Cat cat2 = new lesson47.Cat("Python",7,"green");
+        lesson47.Cat cat3 = new lesson47.Cat("Tiger",3,"yellow");
+        lesson47.Cat cat4 = new lesson47.Cat("Panda",4,"black");
+        lesson47.Cat cat5 = new lesson47.Cat("Panda",4,"black");
 
-        List<Cat> cats = Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat1);
+        List<lesson47.Cat> cats = Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat1);
         cats.forEach(System.out::println);
 
         System.out.println("=====================\n");
@@ -122,18 +276,18 @@ public class StreamExample {
 
     private static void task8(){
 
-        Cat cat1 = new Cat("Bear",5,"braun");
-        Cat cat2 = new Cat("Python",7,"green");
-        Cat cat3 = new Cat("Tiger",3,"yellow");
-        Cat cat4 = new Cat("Panda",4,"black");
+        lesson47.Cat cat1 = new lesson47.Cat("Bear",5,"braun");
+        lesson47.Cat cat2 = new lesson47.Cat("Python",7,"green");
+        lesson47.Cat cat3 = new lesson47.Cat("Tiger",3,"yellow");
+        lesson47.Cat cat4 = new lesson47.Cat("Panda",4,"black");
 
-        Cat[] cats = {cat1,cat2,null, cat3,new Cat(null,10,"red"), cat4};
+        lesson47.Cat[] cats = {cat1,cat2,null, cat3,new lesson47.Cat(null,10,"red"), cat4};
 
         // Получить список кошек,имя которых длиннее 4-х символов
 
         // Arrays.stream(cats) - создаёт поток из э-тов массива
 
-        List<Cat> longCats = Arrays.stream(cats)
+        List<lesson47.Cat> longCats = Arrays.stream(cats)
 //                .filter(cat -> cat != null) // оставить в потоке только не null
                 .filter(cat -> Objects.nonNull(cat)) // оставить в потоко только НЕ null
                 .filter(cat -> Objects.nonNull(cat.getName()))// проверка какого-то поля на null
@@ -151,7 +305,7 @@ public class StreamExample {
 
     private static void task7(){
 
-        List<Cat> cats = getListCats();
+        List<lesson47.Cat> cats = getListCats();
 
         // Хочу вывести на экран имена котов, чей вес меньше 5
         // Хочу вывести на экран котов,оставшихся в потоке после фильтрации
@@ -177,14 +331,14 @@ public class StreamExample {
 
         // Получить список имён кошек,у которых имена короче 5 символов
 
-        List<Cat> cats = getListCats();
+        List<lesson47.Cat> cats = getListCats();
         /*
         Классический - методы фильтрации должны выполняться в потоке как можно раньше.
         Эффективность
          */
         List<String> names1 = cats.stream()
                 .filter(cat -> cat.getName().length() < 5)
-                .map(Cat::getName)
+                .map(lesson47.Cat::getName)
                 .toList();
         System.out.println(names1);
 
@@ -194,7 +348,7 @@ public class StreamExample {
 
         System.out.println("=========================\n");
         List<String> names2 = cats.stream()
-                .map(Cat::getName)
+                .map(lesson47.Cat::getName)
                 .filter(name -> name.length() < 5)
                 .toList();
         System.out.println(names2);
@@ -205,7 +359,7 @@ public class StreamExample {
     }
 
     private static void task5(){
-        List<Cat> cats = getListCats();
+        List<lesson47.Cat> cats = getListCats();
         /*
         Получить список имён кошек,чей вес больше 4
 
@@ -224,14 +378,14 @@ public class StreamExample {
     }
 
     private static void task4(){
-        List<Cat> cats =getListCats();
+        List<lesson47.Cat> cats =getListCats();
 
         // Получить список имён всех кошек
         Stream<String> namesStream = cats.stream()
                 .map(cat -> cat.getName());
 
         List<String> catNames = cats.stream()
-                .map(Cat::getName)
+                .map(lesson47.Cat::getName)
                 .toList();
         System.out.println("catNames: " + catNames);
 
@@ -240,38 +394,38 @@ public class StreamExample {
     }
 
     private static void task3(){
-        List<Cat> cats = getListCats();
+        List<lesson47.Cat> cats = getListCats();
 
         // Оставить котов с именем длиннее 4-х символов
-        Stream<Cat> catStream = cats.stream()
+        Stream<lesson47.Cat> catStream = cats.stream()
                 .filter(cat -> cat.getName().length() > 4);
 
         // пока не запущен терминальный метод - промежуточные операции не выполняются
 
-        List<Cat> lengCat = catStream.toList();
+        List<lesson47.Cat> lengCat = catStream.toList();
         System.out.println("lengCat: " + lengCat);
 
     }
 
-    private static List<Cat> getListCats(){
+    private static List<lesson47.Cat> getListCats(){
         return List.of(
-                new Cat("Bear",5,"braun"),
-                new Cat("Python",7,"green"),
-                new Cat("Tiger",3,"yellow"),
-                new Cat("Panda",4,"black")
+                new lesson47.Cat("Bear",5,"braun"),
+                new lesson47.Cat("Python",7,"green"),
+                new lesson47.Cat("Tiger",3,"yellow"),
+                new lesson47.Cat("Panda",4,"black")
         );
     }
 
     private static void task2(){
-        List<Cat> cats = getListCats();
+        List<lesson47.Cat> cats = getListCats();
 
         // список кошек с весом больше 4
-        Stream<Cat> catStream = cats.stream()
+        Stream<lesson47.Cat> catStream = cats.stream()
                 .filter(cat -> cat.getWeight() > 4);
 
         // Терминальный метод
 //        List<Cat> fatCats = catStream.collect(Collectors.toList());
-        List<Cat> fatCats = catStream.toList();
+        List<lesson47.Cat> fatCats = catStream.toList();
         System.out.println("fatCats: " + fatCats);
 
         // Повторно использовать "закрытый" поток нельзя
@@ -284,7 +438,7 @@ public class StreamExample {
 
     }
 
-    public static void task1(){
+    private static void task1(){
         List<Integer> integers = List.of(-1,12,0,5,1,-15,24,99);
 
         // Получить список,содержащий все положительные числа из исходного списка
