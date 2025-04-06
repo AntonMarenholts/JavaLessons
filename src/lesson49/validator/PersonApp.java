@@ -17,6 +17,11 @@ public class PersonApp {
 
         person.setPassword("Password123!");
         System.out.println(person);
+
+        Person person1 = new Person("john@gmail.com","qwerty");
+        person1.setPassword("dsgdgdg");
+        System.out.println(person1);
+
     }
 }
 
