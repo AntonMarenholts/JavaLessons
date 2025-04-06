@@ -1,5 +1,7 @@
 package lesson49.validator;
 
+import lesson49.hw49.PasswordValidateException;
+
 public class PersonValidator {
 
     public static void validateEmail(String email) throws EmailValidateException {
@@ -58,4 +60,25 @@ public class PersonValidator {
         ;
 
     }
+
+    public static void PasswordValid(String password) throws PasswordValidateException {
+
+        if (password == null || password.length() < 8) {
+            throw new PasswordValidateException("Password must be at least 8 characters long");
+        }
+
+        if (password.chars().noneMatch(Character::isUpperCase)) {
+            throw new PasswordValidateException("Password must contain at least one uppercase letter");
+        }
+        if (password.chars().noneMatch(Character::isLowerCase)) {
+            throw new PasswordValidateException("Password must contain at least one lowercase letter");
+        }
+        if (password.chars().noneMatch(Character::isDigit)) {
+            throw new PasswordValidateException("Password must contain at least one digit");
+        }
+        if (password.chars().noneMatch(ch -> "!%$@&*()[],.".indexOf(ch) >= 0)) {
+            throw new PasswordValidateException("Password must contain at least one special character");
+        }
+    }
 }
+
